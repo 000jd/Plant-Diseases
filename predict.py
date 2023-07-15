@@ -13,7 +13,7 @@ def predict_diseases(image):
     image = transform(image).unsqueeze(0)
 
     model = QuantizablePlantDiseasesNet(num_classes=38)
-    model.load_state_dict(torch.load('res_checkpoint_quantized.pth', map_location=torch.device('cpu')))
+    model.load_state_dict(torch.load('PlantDiseases_quantized_checkpoint.pth', map_location=torch.device('cpu')))
     model.eval()
 
     with torch.no_grad():
