@@ -1,11 +1,9 @@
 import torch
-import torch.nn as nn
-import torch.optim as optim
 from torchvision import transforms
-from models.model import QuantizableFlowerResNet
+from model import QuantizablePlantDiseasesNet
 from utils import classes
 
-def predict_flower(image):
+def predict_diseases(image):
     transform = transforms.Compose([
         transforms.Resize((224, 224)),
         transforms.ToTensor(),
@@ -14,7 +12,7 @@ def predict_flower(image):
 
     image = transform(image).unsqueeze(0)
 
-    model = QuantizableFlowerResNet(num_classes=299)
+    model = QuantizablePlantDiseasesNet(num_classes=38)
     model.load_state_dict(torch.load('res_checkpoint_quantized.pth', map_location=torch.device('cpu')))
     model.eval()
 
